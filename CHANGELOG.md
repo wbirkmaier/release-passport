@@ -7,3 +7,4 @@
 - Added deterministic passport canonicalization and before/after diffing.
 - Added local signing and verification for canonical passport content.
 - Added Markdown and HTML rendering for human passport review.
+- Added a signer adapter boundary for local and future KMS-backed signing.
