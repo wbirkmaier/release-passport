@@ -1,3 +1,7 @@
 # Examples
 
-Example capture, verify, and render flows will be added as the passport model lands.
+```bash
+uv run release-passport import tests/fixtures/passport-import
+```
+
+The shipped fixture includes an Argo CD application revision change, manifest checksum, image digests, and changed Kubernetes resources.
