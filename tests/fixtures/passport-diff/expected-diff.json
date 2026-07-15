@@ -1,0 +1,14 @@
+{
+  "previous_revision": "d3adb33f",
+  "new_revision": "f00baa77",
+  "changed_resources_added": [
+    "Deployment:payments/api"
+  ],
+  "changed_resources_removed": [],
+  "images_added": [
+    "ghcr.io/example/payments-api@sha256:22223333444455556666777788889999aaaabbbbccccddddeeeeffff00001111"
+  ],
+  "images_removed": [
+    "ghcr.io/example/payments-api@sha256:111122223333444455556666777788889999aaaabbbbccccddddeeeeffff0000"
+  ]
+}

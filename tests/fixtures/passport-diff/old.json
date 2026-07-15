@@ -1,0 +1,30 @@
+{
+  "application": "payments-api",
+  "repository": "github.com/example/platform-live",
+  "previous_revision": "c0ffee00",
+  "new_revision": "d3adb33f",
+  "commit_sha": "d3adb33faaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "manifest_checksum": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "sync_initiator": "argocd-server",
+  "sync_result": "Succeeded",
+  "health_state": "Healthy",
+  "deployment_timestamp": "2026-07-14T20:00:00Z",
+  "approval_reference": "change-2026-0714-41",
+  "rollback_target": "c0ffee00",
+  "changed_resources": [
+    {
+      "kind": "ConfigMap",
+      "namespace": "payments",
+      "name": "api-config"
+    }
+  ],
+  "images": [
+    {
+      "name": "ghcr.io/example/payments-api",
+      "digest": "sha256:111122223333444455556666777788889999aaaabbbbccccddddeeeeffff0000"
+    }
+  ],
+  "evidence_source_ids": [
+    "argocd-app:payments-api"
+  ]
+}
