@@ -9,6 +9,8 @@ from release_passport.canonical import canonicalize_passport
 from release_passport.diffing import diff_passports
 from release_passport.exceptions import ReleasePassportError
 from release_passport.fixtures import load_passport_fixture
+from release_passport.models import PassportDocument
+from release_passport.signing import SignedPassport, verify_canonical_content
 from release_passport.snapshot_io import load_passport
 
 app = typer.Typer(
@@ -66,6 +68,23 @@ def canonicalize(
         raise typer.Exit(code=error.exit_code) from error
 
     typer.echo(canonicalize_passport(passport))
+
+
+@app.command("verify")
+def verify(
+    signed_passport: Annotated[Path, typer.Argument(exists=True, readable=True, dir_okay=False)],
+) -> None:
+    try:
+        signed = SignedPassport.model_validate_json(signed_passport.read_text())
+        canonical = canonicalize_passport(PassportDocument.model_validate(signed.passport))
+    except ReleasePassportError as error:
+        raise typer.Exit(code=error.exit_code) from error
+    except Exception as error:
+        raise typer.Exit(code=2) from error
+
+    # Fixture-only local verification secret for deterministic offline tests.
+    result = verify_canonical_content(canonical, signed.signature, secret="fixture-secret")
+    typer.echo(result.model_dump_json(indent=2))
 
 
 def main(argv: Annotated[list[str] | None, typer.Argument(hidden=True)] = None) -> None:
