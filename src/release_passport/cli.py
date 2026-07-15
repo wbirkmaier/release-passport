@@ -46,6 +46,32 @@ def import_fixture(
     typer.echo(passport.model_dump_json(indent=2))
 
 
+@app.command("capture")
+def capture(
+    application: Annotated[str, typer.Argument(help="Application name to capture evidence for.")],
+    fixtures: Annotated[
+        Path,
+        typer.Option(
+            "--fixtures",
+            exists=True,
+            readable=True,
+            file_okay=False,
+            dir_okay=True,
+            help="Directory containing fixture-backed passport evidence.",
+        ),
+    ],
+) -> None:
+    try:
+        passport = load_passport_fixture(fixtures)
+    except ReleasePassportError as error:
+        raise typer.Exit(code=error.exit_code) from error
+
+    if passport.application != application:
+        raise typer.Exit(code=3)
+
+    typer.echo(passport.model_dump_json(indent=2))
+
+
 @app.command("diff")
 def diff(
     old: Annotated[Path, typer.Argument(exists=True, readable=True, dir_okay=False)],
