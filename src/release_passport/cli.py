@@ -10,6 +10,7 @@ from release_passport.diffing import diff_passports
 from release_passport.exceptions import ReleasePassportError
 from release_passport.fixtures import load_passport_fixture
 from release_passport.models import PassportDocument
+from release_passport.rendering import render_passport
 from release_passport.signing import SignedPassport, verify_canonical_content
 from release_passport.snapshot_io import load_passport
 
@@ -85,6 +86,22 @@ def verify(
     # Fixture-only local verification secret for deterministic offline tests.
     result = verify_canonical_content(canonical, signed.signature, secret="fixture-secret")
     typer.echo(result.model_dump_json(indent=2))
+
+
+@app.command("render")
+def render(
+    passport_path: Annotated[Path, typer.Argument(exists=True, readable=True, dir_okay=False)],
+    output_format: Annotated[
+        str, typer.Option("--format", help="Supported: markdown or html.")
+    ] = "markdown",
+) -> None:
+    try:
+        passport = load_passport(passport_path)
+        rendered = render_passport(passport, output_format)
+    except ReleasePassportError as error:
+        raise typer.Exit(code=error.exit_code) from error
+
+    typer.echo(rendered)
 
 
 def main(argv: Annotated[list[str] | None, typer.Argument(hidden=True)] = None) -> None:
