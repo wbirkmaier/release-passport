@@ -27,4 +27,8 @@ ReleasePassport captures deployment evidence into a deterministic artifact that 
 
 ## Status
 
-Repository scaffolding and CLI baseline are in place. Evidence and signing slices land next.
+```bash
+uv run release-passport import tests/fixtures/passport-import
+```
+
+The current slice imports sanitized fixture evidence into a deterministic passport JSON document. Capture, signing, verification, and rendering land in later slices.
