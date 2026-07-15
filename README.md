@@ -35,3 +35,5 @@ uv run release-passport render tests/fixtures/passport-diff/new.json --format ht
 ```
 
 The current slice imports sanitized fixture evidence into a deterministic passport JSON document, compares two passport snapshots, verifies a locally signed passport artifact, and renders human-readable HTML or Markdown from the unsigned passport model.
+
+The current signer is local and fixture-oriented. A KMS-backed signer is planned behind the same interface.
