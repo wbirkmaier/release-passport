@@ -22,7 +22,7 @@ class LocalSignerAdapter(SignerAdapter):
 
 @dataclass(frozen=True)
 class KmsSignerAdapter(SignerAdapter):
-    key_id: str = "kms-key-placeholder"
+    key_id: str = "kms-key-future"
 
     def sign(self, canonical_content: str) -> SignatureRecord:
         raise ReleasePassportError(

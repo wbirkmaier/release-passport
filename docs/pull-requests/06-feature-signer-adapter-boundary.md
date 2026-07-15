@@ -6,7 +6,7 @@ ReleasePassport's local signing path worked, but it still coupled the CLI direct
 
 - added a signer adapter interface
 - implemented a shipped local signer adapter
-- added an explicit placeholder KMS signer adapter that fails clearly rather than pretending live signing works
+- added an explicit future KMS signer stub that fails clearly rather than pretending live signing works
 
 ## Important decisions
 
