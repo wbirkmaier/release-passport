@@ -29,6 +29,7 @@ ReleasePassport captures deployment evidence into a deterministic artifact that 
 
 ```bash
 uv run release-passport import tests/fixtures/passport-import
+uv run release-passport diff tests/fixtures/passport-diff/old.json tests/fixtures/passport-diff/new.json
 ```
 
-The current slice imports sanitized fixture evidence into a deterministic passport JSON document. Capture, signing, verification, and rendering land in later slices.
+The current slice imports sanitized fixture evidence into a deterministic passport JSON document and compares two passport snapshots. Capture, signing, verification, and rendering land in later slices.
